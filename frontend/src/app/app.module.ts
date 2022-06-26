@@ -7,13 +7,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './component/template/header/header.component';
 import { FooterComponent } from './component/template/footer/footer.component';
 import { HomeComponent } from './views/home/home.component';
+import { ProductComponent } from './views/product/product.component';
+import { RecommendComponent } from './views/recommend/recommend.component';
+import { ListComponent } from './views/recommend/list/list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    HomeComponent
+    HomeComponent,
+    ProductComponent,
+    RecommendComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,
