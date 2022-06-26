@@ -1,0 +1,22 @@
+.logo-header {
+    width: 150px;
+    padding: 0px 0px 5px 0px;
+}
+/*
+rewrite bootstrap core
+ */
+.container-header {
+    background-color: aliceblue;
+    border-bottom: 1px solid #000;
+}
+.navbar-expand-lg .navbar-collapse {
+    justify-content: right;
+}
+@media only screen and (max-width: 991px) {
+    div#navbarNav {
+        border-top: 1px solid #000;
+    }
+}
+/*
+End rewrite bootstrap core
+ */
