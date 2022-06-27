@@ -14,11 +14,12 @@ import {Recommend} from "../recommend.model";
 export class CreateComponent implements OnInit {
 
   recommend: Recommend = {
-    id_customer: 1,
-    id_product: 1,
-    name: 'Beto',
-    cpf: '888120575-00',
-    status: 'processando'
+    id_customer: null,
+    id_product: null,
+    name: '',
+    email: '',
+    cpf: '',
+    status: ''
   }
 
   constructor(

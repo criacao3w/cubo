@@ -1,13 +1,65 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="">
+            <div class="">
+                <h2 class="card-title">Indicação do produto:</h2>
+                <h6 class="card-title">Relógio inteligente Zeblaze</h6>
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="mb-3"/>
+<form>
+    <input type="hidden" name="id_product" [(ngModel)]="recommend.id_product">
+    <div class="form-group">
+        <input
+                type="text"
+                class="form-control"
+                placeholder="Nome"
+                name="nome"
+                [(ngModel)]="recommend.name"
+        >
+    </div>
+    <div class="form-group">
+        <input
+                type="email"
+                class="form-control"
+                placeholder="Email"
+                name="email"
+                [(ngModel)]="recommend.email"
+        >
+    </div>
+    <div class="form-group">
+        <input
+                type="text"
+                class="form-control"
+                placeholder="CPF"
+                name="cpf"
+                [(ngModel)]="recommend.cpf"
+        >
+    </div>
+    <div class="form-group">
+        <label for="inputState">Status:</label>
+        <select
+                class="form-control"
+                name="status"
+                [(ngModel)]="recommend.status"
+        >
+            <option selected>Choose...</option>
+            <option>...</option>
+        </select>
+    </div>
+</form>
 <button
         type="button"
-        class="col-md-4 btn btn-success btn-custom-pd-right"
+        class="col-md-5 btn btn-success btn-custom-pd-right"
         (click)="recommendCreate()"
 >
     Novo Recomendação
 </button>
 <button
         type="button"
-        class="col-md-4 btn btn-info"
+        class="col-md-5 btn btn-info"
         (click)="cancelCreate()"
 >
     Cancelar
