@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+
+
+
+import { RecommendService } from "../recommend.service";
 import { Router } from "@angular/router";
-import { ToastrService } from 'ngx-toastr';
+import {Recommend} from "../recommend.model";
 
 @Component({
   selector: 'app-create',
@@ -9,25 +13,31 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class CreateComponent implements OnInit {
 
-  constructor(private router: Router, private toastr: ToastrService) { }
-
-  showSuccess() {
-    this.toastr.success('Sucesso!', 'Toastr fun!');
+  recommend: Recommend = {
+    id_customer: 1,
+    id_product: 1,
+    name: 'Beto',
+    cpf: '888120575-00',
+    status: 'processando'
   }
 
-  showError() {
-    this.toastr.error('Erro!', 'Toastr fun!');
+  constructor(
+      private recommendService: RecommendService,
+      private router: Router
+  ) { }
+
+  recommendCreate(): void {
+    this.recommendService.create(this.recommend).subscribe(() => {
+      this.recommendService.showSuccess('Recomendação criada!!!', 'Sucesso')
+      this.router.navigate(['/produtos'])
+    })
   }
 
-  showInfo() {
-    this.toastr.info('Info!', 'Toastr fun!');
-  }
-
-  showWarning() {
-    this.toastr.warning('Warning!', 'Toastr fun!');
+  cancelCreate(): void {
+    // @ts-ignore
+    this.router.navigate(['/produtos'])
   }
 
   ngOnInit(): void {
-    this.showWarning();
   }
 }

@@ -3,6 +3,6 @@ export  interface Recommend {
     id_customer: number
     id_product: number
     name: string
-    cpf: number
+    cpf: string
     status: string
 }

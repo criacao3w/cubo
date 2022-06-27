@@ -8,10 +8,11 @@ import {HeaderComponent} from './component/template/header/header.component';
 import {FooterComponent} from './component/template/footer/footer.component';
 import {HomeComponent} from './views/home/home.component';
 import {ProductComponent} from './views/product/product.component';
-import {RecommendComponent} from './views/recommend/recommend.component';
 import {ListComponent} from './views/recommend/list/list.component';
 import {CreateComponent} from './views/recommend/create/create.component';
 import {ToastrModule} from 'ngx-toastr';
+import {HttpClientModule} from '@angular/common/http';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -20,17 +21,18 @@ import {ToastrModule} from 'ngx-toastr';
         FooterComponent,
         HomeComponent,
         ProductComponent,
-        RecommendComponent,
         ListComponent,
-        CreateComponent
+        CreateComponent,
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
         ToastrModule.forRoot(),
+        HttpClientModule,
+        FormsModule
     ],
-    providers: [],
+    providers: [HttpClientModule],
     bootstrap: [AppComponent]
 })
 export class AppModule {
