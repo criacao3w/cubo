@@ -36,6 +36,15 @@ class RecommendController extends Controller
         );
     }
 
+    public function getRecommendByProduct($id){
+
+        return response()->json(
+            $this->recommend::query()->where('id_product', $id)->get(),
+            200, $this->header,
+            JSON_UNESCAPED_UNICODE
+        );
+    }
+
     public function saveRecommend(Request $request){
 
         $this->recommend->create($request->all());
@@ -51,7 +60,6 @@ class RecommendController extends Controller
     public function updateRecommend($id, Request $request){
 
         $recommend = $this->recommend->find($id);
-
         $recommend->update($request->all());
 
         return response()->json([
@@ -65,7 +73,6 @@ class RecommendController extends Controller
     public function destroyRecommend($id){
 
         $recommend = $this->recommend->find($id);
-
         $recommend->delete();
 
         return response()->json([
