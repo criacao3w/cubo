@@ -10,6 +10,7 @@ class RecommendController extends Controller
 {
 
     private $recommend;
+    private $error = [];
     private  $header = [
         'Content-Type' => 'application/json; charset=UTF-8',
         'charset' => 'utf-8'
@@ -49,24 +50,34 @@ class RecommendController extends Controller
 
     public function store(Request $request){
 
+        $request['cpf'] = preg_replace('/\D/', '', $request['cpf']);
+
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'telephone' => 'required',
             'name' => 'required',
-            'cpf' => 'required'
+            'cpf' => 'required|unique:recommend'
         ]);
 
         if ($validator->fails()) {
             return $validator->errors()->toJson();
-            die;
+        }
+
+        $cpf = $request['cpf'];
+        if(!$this->isValidateCpf($cpf)){
+            return response()->json([
+                'data' => [
+                    'status' => 'error',
+                    'message' => 'The cpf must be a valid cpf.',
+                ]
+            ]);
         }
 
         $this->recommend->create($request->all());
-
         return response()->json([
             'data' => [
+                'status' => 'success',
                 'message' => 'Recomendação feita com sucesso!',
-                'data' => $request->all()
             ]
         ]);
     }
@@ -78,8 +89,8 @@ class RecommendController extends Controller
 
         return response()->json([
             'data' => [
-                'message' => 'Recomendação atualizada com sucesso!',
-                'data' => $request->all()
+                'status' => 'success',
+                'message' => 'Recomendação atualizada com sucesso!'
             ]
         ]);
     }
@@ -91,8 +102,26 @@ class RecommendController extends Controller
 
         return response()->json([
             'data' => [
+                'status' => 'success',
                 'message' => 'Recomendação excluída com sucesso!'
             ]
         ]);
+    }
+
+    public function isValidateCpf($value)
+    {
+        $c = preg_replace('/\D/', '', $value);
+        if (strlen($c) != 11 || preg_match("/^{$c[0]}{11}$/", $c)) {
+            return false;
+        }
+        for ($s = 10, $n = 0, $i = 0; $s >= 2; $n += $c[$i++] * $s--);
+        if ($c[9] != ((($n %= 11) < 2) ? 0 : 11 - $n)) {
+            return false;
+        }
+        for ($s = 11, $n = 0, $i = 0; $s >= 2; $n += $c[$i++] * $s--);
+        if ($c[10] != ((($n %= 11) < 2) ? 0 : 11 - $n)) {
+            return false;
+        }
+        return true;
     }
 }
