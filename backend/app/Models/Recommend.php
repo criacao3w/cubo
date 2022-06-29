@@ -13,6 +13,7 @@ class Recommend extends Model
         'id_customer',
         'name',
         'email',
+        'telephone',
         'cpf',
         'status'
     ];

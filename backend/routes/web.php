@@ -23,8 +23,8 @@ Endpoint for products
 GET
 */
 $router->group(['prefix' => 'product'], function () use($router){
-    $router->get('/all', 'ProductController@getProductAll');
-    $router->get('/{id}', 'ProductController@getProduct');
+    $router->get('/all', 'ProductController@list');
+    $router->get('/{id}', 'ProductController@show');
 });
 
 /*
@@ -32,10 +32,13 @@ Endpoint for recommend
 GET / POST / PUT / DELETE
 */
 $router->group(['prefix' => 'recommend'], function () use($router){
-    $router->get('/all', 'RecommendController@getRecommendAll');
-    $router->get('/{id}', 'RecommendController@getRecommend');
-    $router->post('/save', 'RecommendController@saveRecommend');
-    $router->put('/update/{id}', 'RecommendController@updateRecommend');
-    $router->delete('/delete/{id}', 'RecommendController@destroyRecommend');
-    $router->get('/byproduct/{id}', 'RecommendController@getRecommendByProduct');
+
+    /*error*/
+
+    $router->get('/all', 'RecommendController@list');
+    $router->get('/{id}', 'RecommendController@show');
+    $router->post('/save', 'RecommendController@store');
+    $router->put('/update/{id}', 'RecommendController@update');
+    $router->delete('/delete/{id}', 'RecommendController@destroy');
+    $router->get('/byproduct/{id}', 'RecommendController@showByProduct');
 });

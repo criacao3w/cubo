@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('id_customer');
             $table->string('name');
             $table->string('email');
+            $table->string('telephone');
             $table->string('cpf');
             $table->string('status');
             $table->timestamps();

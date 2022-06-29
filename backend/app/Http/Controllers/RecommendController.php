@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Recommend;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class RecommendController extends Controller
 {
@@ -20,7 +21,8 @@ class RecommendController extends Controller
         $this->recommend = $recommend;
     }
 
-    public function getRecommendAll(){
+    public function list(){
+
         return response()->json(
             $this->recommend::all() ,
             200, $this->header,
@@ -28,7 +30,7 @@ class RecommendController extends Controller
         );
     }
 
-    public function getRecommend($id){
+    public function show($id){
         return response()->json(
             $this->recommend::find($id) ,
             200, $this->header,
@@ -36,7 +38,7 @@ class RecommendController extends Controller
         );
     }
 
-    public function getRecommendByProduct($id){
+    public function showByProduct($id){
 
         return response()->json(
             $this->recommend::query()->where('id_product', $id)->get(),
@@ -45,7 +47,19 @@ class RecommendController extends Controller
         );
     }
 
-    public function saveRecommend(Request $request){
+    public function store(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'telephone' => 'required',
+            'name' => 'required',
+            'cpf' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors()->toJson();
+            die;
+        }
 
         $this->recommend->create($request->all());
 
@@ -57,7 +71,7 @@ class RecommendController extends Controller
         ]);
     }
 
-    public function updateRecommend($id, Request $request){
+    public function update($id, Request $request){
 
         $recommend = $this->recommend->find($id);
         $recommend->update($request->all());
@@ -70,7 +84,7 @@ class RecommendController extends Controller
         ]);
     }
 
-    public function destroyRecommend($id){
+    public function destroy($id){
 
         $recommend = $this->recommend->find($id);
         $recommend->delete();

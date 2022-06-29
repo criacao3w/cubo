@@ -19,7 +19,7 @@ class ProductController extends Controller
         $this->product = $product;
     }
 
-    public function getProductAll(){
+    public function list(){
         return response()->json(
             $this->product::all() ,
             200, $this->header,
@@ -27,7 +27,7 @@ class ProductController extends Controller
         );
     }
 
-    public function getProduct($id){
+    public function show($id){
         return response()->json(
             $this->product::find($id) ,
             200, $this->header,
