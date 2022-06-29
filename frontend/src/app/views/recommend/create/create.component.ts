@@ -18,6 +18,7 @@ export class CreateComponent implements OnInit {
     id_product: null,
     name: '',
     email: '',
+    telephone: '',
     cpf: '',
     status: ''
   }
@@ -28,6 +29,7 @@ export class CreateComponent implements OnInit {
   ) { }
 
   recommendCreate(): void {
+    console.log('dlksajdklsa');
     this.recommendService.create(this.recommend).subscribe(() => {
       this.recommendService.showSuccess('Recomendação criada!!!', 'Sucesso')
       this.router.navigate(['/produtos'])

@@ -11,7 +11,7 @@ import {Observable} from "rxjs";
 })
 export class RecommendService {
 
-  baseURL: string = "http://localhost:4200";
+  baseURL: string = "http://localhost:8000";
 
   constructor(
       private toastr: ToastrService,
@@ -19,7 +19,7 @@ export class RecommendService {
   ) { }
 
   create(recommend: Recommend): Observable<Recommend> {
-    return this.http.post<Recommend>(this.baseURL, recommend);
+    return this.http.post<Recommend>(this.baseURL + '/recommend/save', recommend);
   }
 
   showSuccess(msg: string, title: string) {

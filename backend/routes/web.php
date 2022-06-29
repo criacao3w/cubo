@@ -37,7 +37,7 @@ $router->group(['prefix' => 'recommend'], function () use($router){
 
     $router->get('/all', 'RecommendController@list');
     $router->get('/{id}', 'RecommendController@show');
-    $router->post('/save', 'RecommendController@store');
+    $router->post('/save', 'RecommendController@store')->middleware("cors");
     $router->put('/update/{id}', 'RecommendController@update');
     $router->delete('/delete/{id}', 'RecommendController@destroy');
     $router->get('/byproduct/{id}', 'RecommendController@showByProduct');
